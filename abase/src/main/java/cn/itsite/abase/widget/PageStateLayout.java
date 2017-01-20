@@ -55,7 +55,7 @@
 //            getChildAt(i).setVisibility(GONE);
 //        }
 //
-//        findViewById(R.id.btn_empty_retry).setOnClickListener(new NoMultiClickListener() {
+//        findViewById(R.id.btn_empty_retry).setOnClickListener(
 //
 //            @Override
 //            public void onNoMultiClick(View view) {
@@ -65,7 +65,7 @@
 //            }
 //        });
 //
-//        findViewById(R.id.btn_error_retry).setOnClickListener(new NoMultiClickListener() {
+//        findViewById(R.id.btn_error_retry).setOnClickListener(
 //            @Override
 //            public void onNoMultiClick(View view) {
 //                if (null != onRetryClickListener) {

@@ -6,6 +6,6 @@ package cn.itsite.abase.common;
  * Email：langmanleguang@qq.com
  */
 public class ImageLoader {
-    private static final String TAG = ImageLoader.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
 }

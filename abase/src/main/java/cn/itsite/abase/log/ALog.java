@@ -13,7 +13,7 @@ import java.io.StringWriter;
  * Email：langmanleguang@qq.com
  */
 public final class ALog {
-
+    private final String TAG = this.getClass().getSimpleName();
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String NULL_TIPS = "Log with null object";
 

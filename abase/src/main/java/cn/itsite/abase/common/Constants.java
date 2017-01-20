@@ -1,17 +1,12 @@
 package cn.itsite.abase.common;
 
 
-
-import java.io.File;
-
-import cn.itsite.abase.utils.DirectoryUtils;
-
 /**
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
 public class Constants {
-    private static final String TAG = Constants.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     /**
      * 不允许new
      */

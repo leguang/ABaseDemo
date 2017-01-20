@@ -15,7 +15,7 @@ import okio.BufferedSource;
  * Email：langmanleguang@qq.com
  */
 public class LoggingInterceptor implements Interceptor {
-    private static final String TAG = LoggingInterceptor.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     public Response intercept(Chain chain) throws IOException {

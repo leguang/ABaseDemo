@@ -7,7 +7,7 @@ import android.util.Log;
  * Created by zhaokaiqiang on 15/12/11.
  */
 public class ALogUtils {
-
+    private final String TAG = this.getClass().getSimpleName();
     public static boolean isEmpty(String line) {
         return TextUtils.isEmpty(line) || line.equals("\n") || line.equals("\t") || TextUtils.isEmpty(line.trim());
     }

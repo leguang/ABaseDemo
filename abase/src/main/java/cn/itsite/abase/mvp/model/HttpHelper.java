@@ -28,8 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Email：langmanleguang@qq.com
  */
 public class HttpHelper {
-
-    private static final String TAG = HttpHelper.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     public static final String BASE_URL = Constants.BASE_URL;
     private static OkHttpClient mOkHttpClient;
     private static Retrofit mRetrofit;

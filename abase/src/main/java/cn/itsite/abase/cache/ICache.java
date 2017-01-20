@@ -14,5 +14,4 @@ public interface ICache {
     boolean contains(String key);
 
     void clear();
-
 }

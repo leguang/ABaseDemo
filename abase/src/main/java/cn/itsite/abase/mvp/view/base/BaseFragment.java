@@ -16,7 +16,7 @@ import cn.itsite.abase.utils.ScreenUtils;
  * Email：langmanleguang@qq.com
  */
 public abstract class BaseFragment<P extends BaseContract.Presenter> extends Fragment {
-    private static final String TAG = BaseFragment.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     public P mPresenter;
 
     @Override

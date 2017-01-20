@@ -8,7 +8,7 @@ import android.util.Log;
  * Email：langmanleguang@qq.com
  */
 public class BaseLog {
-
+    private final String TAG = this.getClass().getSimpleName();
     private static final int MAX_LENGTH = 4000;
 
     public static void printDefault(int type, String tag, String msg) {

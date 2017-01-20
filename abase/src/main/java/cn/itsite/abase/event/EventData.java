@@ -5,6 +5,7 @@ package cn.itsite.abase.event;
  * Email：langmanleguang@qq.com
  */
 public class EventData {
+    private final String TAG = this.getClass().getSimpleName();
     public int position;
 
     public EventData(int position) {

@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamSource;
  * Email：langmanleguang@qq.com
  */
 public class XmlLog {
-
+    private final String TAG = this.getClass().getSimpleName();
     public static void printXml(String tag, String xml, String headString) {
 
         if (xml != null) {

@@ -20,7 +20,7 @@ import cn.itsite.abase.utils.NetworkUtils;
  * Email：langmanleguang@qq.com
  */
 public abstract class BaseActivity<P extends BaseContract.Presenter> extends AppCompatActivity {
-    private static final String TAG = BaseActivity.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     public P mPresenter;
 
     @Override

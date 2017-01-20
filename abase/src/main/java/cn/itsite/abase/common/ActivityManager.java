@@ -10,7 +10,7 @@ import java.util.Stack;
  * Email：langmanleguang@qq.com
  */
 public class ActivityManager {
-    private static final String TAG = ActivityManager.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     private static Stack<Activity> activityStack;
     private static ActivityManager instance;
 

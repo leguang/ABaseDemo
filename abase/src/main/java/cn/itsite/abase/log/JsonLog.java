@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Email：langmanleguang@qq.com
  */
 public class JsonLog {
-
+    private final String TAG = this.getClass().getSimpleName();
     public static void printJson(String tag, String msg, String headString) {
 
         String message;

@@ -3,17 +3,21 @@ package cn.itsite.abase.cache;
 import android.support.v4.util.LruCache;
 import android.text.TextUtils;
 
+import cn.itsite.abase.log.ALog;
+
 /**
- * Created by wanglei on 2016/11/28.
+ * Author：leguang on 2016/10/9 0009 15:49
+ * Email：langmanleguang@qq.com
  */
 
 public class MemoryCache implements ICache {
-
+    private final String TAG = this.getClass().getSimpleName();
     private LruCache<String, Object> cache;
     private static MemoryCache instance;
 
     private MemoryCache() {
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
+        ALog.e("maxMemory::" + TAG);
         int cacheSize = maxMemory / 8;
         cache = new LruCache<String, Object>(cacheSize);
 

@@ -18,7 +18,7 @@ import java.util.Random;
  * Email：langmanleguang@qq.com
  */
 public class FileLog {
-
+    private final String TAG = this.getClass().getSimpleName();
     private static final String FILE_PREFIX = "ALog_";
     private static final String FILE_FORMAT = ".log";
 
