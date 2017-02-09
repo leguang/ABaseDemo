@@ -1,47 +1,46 @@
-//package cn.itsite.abase.mvp.model;
-//
-//import java.io.IOException;
-//
-//import cn.itsite.abase.log.ALog;
-//import cn.itsite.abase.utils.NetworkUtils;
-//import okhttp3.CacheControl;
-//import okhttp3.Interceptor;
-//import okhttp3.Request;
-//import okhttp3.Response;
-//
-///**
-// * Author：leguang on 2016/10/9 0009 15:49
-// * Email：langmanleguang@qq.com
-// */
-//public class CacheInterceptor implements Interceptor {
-//    private static final String TAG = CacheInterceptor.class.getSimpleName();
-//
-//    @Override
-//    public Response intercept(Chain chain) throws IOException {
-//        Request request = chain.request();
-//
+package cn.itsite.abase.mvp.model;
+
+import java.io.IOException;
+
+import cn.itsite.abase.log.ALog;
+import cn.itsite.abase.utils.NetworkUtils;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Author：leguang on 2016/10/9 0009 15:49
+ * Email：langmanleguang@qq.com
+ */
+public class CacheInterceptor implements Interceptor {
+    private static final String TAG = CacheInterceptor.class.getSimpleName();
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request request = chain.request();
+
 //        if (!NetworkUtils.isConnected(BaseApplication.mContext)) {
 //            request = request.newBuilder()
 //                    .cacheControl(CacheControl.FORCE_CACHE)
 //                    .build();
 //        }
-//        int tryCount = 0;
-//
-//        Response response = chain.proceed(request);
-//
-//        ALog.e(response.toString());
-//        ALog.json(response.body().string());
-//
-//        while (!response.isSuccessful() && tryCount < 3) {
-//
-//            ALog.e("interceptRequest is not successful - :{}", tryCount);
-//
-//            tryCount++;
-//
-//            // retry the request
-//            response = chain.proceed(request);
-//        }
-//
+        int tryCount = 0;
+
+        Response response = chain.proceed(request);
+
+        ALog.e(response.toString());
+        ALog.json(response.body().string());
+
+        while (!response.isSuccessful() && tryCount < 3) {
+
+            ALog.e("interceptRequest is not successful - :{}", tryCount);
+
+            tryCount++;
+
+            // retry the request
+            response = chain.proceed(request);
+        }
+
 //        if (NetworkUtils.isConnected(BaseApplication.mContext)) {
 //            int maxAge = 0;
 //            // 有网络时, 不缓存, 最大保存时长为0
@@ -57,6 +56,6 @@
 //                    .removeHeader("Pragma")
 //                    .build();
 //        }
-//        return response;
-//    }
-//}
+        return response;
+    }
+}
