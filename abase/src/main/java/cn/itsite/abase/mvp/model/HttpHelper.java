@@ -40,7 +40,7 @@ public class HttpHelper {
     }
 
     //获取单例
-    public static HttpHelper getInstance() {
+    public static <T> T getInstance(Class<T> c) {
         if (INSTANCE == null) {
             synchronized (HttpHelper.class) {
                 if (INSTANCE == null) {
@@ -48,7 +48,7 @@ public class HttpHelper {
                 }
             }
         }
-        return INSTANCE;
+        return INSTANCE.initService(c);
     }
 
     /**
@@ -85,6 +85,9 @@ public class HttpHelper {
         }
     }
 
+    /**
+     * 初始化Retrofit
+     */
     private void initRetrofit() {
         if (null == mRetrofit) {
             initOkHttpClient();
@@ -170,7 +173,14 @@ public class HttpHelper {
         }
     }
 
-    public ApiService initService() {
-        return mRetrofit.create(ApiService.class);
+    /**
+     * 根据传入的接口类获取Retrofit的相应服务
+     *
+     * @param c   Retrofit的API接口
+     * @param <T> 返回的服务类型
+     * @return 返回的服务类型
+     */
+    public <T> T initService(Class<T> c) {
+        return mRetrofit.create(c);
     }
 }

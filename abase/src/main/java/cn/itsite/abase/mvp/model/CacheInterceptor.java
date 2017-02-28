@@ -3,7 +3,6 @@ package cn.itsite.abase.mvp.model;
 import java.io.IOException;
 
 import cn.itsite.abase.log.ALog;
-import cn.itsite.abase.utils.NetworkUtils;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
