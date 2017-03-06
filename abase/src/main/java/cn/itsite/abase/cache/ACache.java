@@ -53,7 +53,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Email：langmanleguang@qq.com
  */
 public class ACache {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = ACache.class.getClass().getSimpleName();
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
     private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
