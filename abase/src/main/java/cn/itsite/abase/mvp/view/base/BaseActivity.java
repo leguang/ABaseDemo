@@ -20,7 +20,7 @@ import cn.itsite.abase.utils.NetworkUtils;
  * Email：langmanleguang@qq.com
  */
 public abstract class BaseActivity<P extends BaseContract.Presenter> extends AppCompatActivity {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = this.getClass().getName();
     public P mPresenter;
 
     @Override
@@ -47,7 +47,7 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
         ActivityManager.getInstance().addActivity(this);
 
         //一旦启动某个Activity就打印Log，方便找到该类
-        ALog.e(getClass().getName());
+        ALog.e(TAG);
     }
 
     public void netWorkTips() {

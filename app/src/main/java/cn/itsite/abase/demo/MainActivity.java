@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.LruCache;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,13 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+
 import cn.itsite.abase.cache.MemoryCache;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
 import cn.itsite.abase.mvp.view.base.BaseActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private final String TAG = MainActivity.class.getClass().getSimpleName();
+    private final String TAG = MainActivity.class.getName();
+    private  Service s;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +58,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ALog.e(TAG);
         MemoryCache.getInstance().clear();
 
+        Class<?> clazz;
+        Method method;
+        try {
 
+            clazz = Class.forName("cn.itsite.abase.demo.Service");
 
+            // clazz=Service.class;
 
+            System.out.println(clazz.getName());
 
+            s = (Service) clazz.newInstance();
 
+            s.cc();
+            ALog.e("2222222222");
+            // method = clazz.getMethod("cc");
+            // method.invoke(clazz.newInstance());
 
-
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @NonNull
@@ -119,5 +142,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ALog.e("onResume");
     }
 }
