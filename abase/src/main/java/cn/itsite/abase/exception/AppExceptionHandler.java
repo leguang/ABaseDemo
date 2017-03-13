@@ -44,7 +44,7 @@ import cn.itsite.abase.log.ALog;
  */
 @SuppressWarnings("unused")
 public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = AppExceptionHandler.class.getName();
 
     //系统默认的UncaughtException处理类
     private Thread.UncaughtExceptionHandler mDefaultHandler;
