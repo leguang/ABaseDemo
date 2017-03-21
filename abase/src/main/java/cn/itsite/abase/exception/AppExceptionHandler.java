@@ -226,7 +226,7 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
             String fileName = "crash-" + time + "-" + timestamp + ".log";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory().getPath() + "/crash/";
-                Log.d(TAG, "path=" + path);
+                Log.e(TAG, "path=" + path);
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();

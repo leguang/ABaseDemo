@@ -37,4 +37,7 @@ dependencies {
     //fragment操作库
     compile 'me.yokeyword:fragmentation:0.9.5'
     compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
+
+    //图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }
