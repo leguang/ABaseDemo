@@ -5,9 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import java.util.logging.LogManager;
-
-import cn.itsite.abase.exception.AppExceptionHandler;
 import cn.itsite.abase.log.ALog;
 
 
@@ -23,8 +20,10 @@ public class BaseApplication extends Application implements Application.Activity
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        Thread.setDefaultUncaughtExceptionHandler(AppExceptionHandler.getInstance(this));
-        registerActivityLifecycleCallbacks(this);
+//        Thread.setDefaultUncaughtExceptionHandler(AppExceptionHandler.getInstance(this));
+//        registerActivityLifecycleCallbacks(this);
+        ALog.init(true, "ABase");
+
     }
 
     @Override

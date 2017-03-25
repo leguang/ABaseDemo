@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -13,13 +12,14 @@ import cn.itsite.abase.common.ActivityManager;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
 import cn.itsite.abase.utils.NetworkUtils;
+import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 
 /**
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public abstract class BaseActivity<P extends BaseContract.Presenter> extends AppCompatActivity {
+public abstract class BaseActivity<P extends BaseContract.Presenter> extends SwipeBackActivity {
     private final String TAG = this.getClass().getName();
     public P mPresenter;
 
@@ -40,7 +40,9 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     }
 
     @NonNull
-    protected abstract P createPresenter();
+    protected P createPresenter() {
+        return null;
+    }
 
     private void initActivity() {
         //把每一个Activity加入栈中
@@ -80,7 +82,6 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     @Override
     protected void onDestroy() {
         if (mPresenter != null) {
-
             mPresenter.detachView();
             mPresenter = null;
         }
