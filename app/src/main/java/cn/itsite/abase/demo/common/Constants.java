@@ -34,6 +34,7 @@ public class Constants {
     public static final int MULTIMEDIA = 6;
     public static final int LBS = 7;
     public static final int PAYMENT = 8;
+    public static final int QRCODE = 9;
 
     //蓝牙模块
     public static final String BLUETOOTH_TYPE = "bluetooth_type";

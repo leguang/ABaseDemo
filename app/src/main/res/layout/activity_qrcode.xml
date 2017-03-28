@@ -8,15 +8,15 @@
     <include layout="@layout/toolbar" />
 
     <Button
-        android:id="@+id/bt_audio"
+        android:id="@+id/bt_scan_qrcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="音频" />
+        android:text="扫描二维码" />
 
     <Button
-        android:id="@+id/bt_video"
+        android:id="@+id/bt_generate_qrcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="视频" />
+        android:text="生成和识别图片二维码" />
 
 </LinearLayout>

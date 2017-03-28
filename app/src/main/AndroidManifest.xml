@@ -23,6 +23,12 @@
     <!-- 蓝牙相关权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- 相机相关权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 震动相关权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 闪光灯相关权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:name=".BaseApplication"
@@ -45,13 +51,40 @@
         <activity
             android:name=".bluetooth.BluetoothActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".customview.CustomViewActivity" />
-        <activity android:name=".designpattern.DesignPatternActivity" />
-        <activity android:name=".ui.UIActivity" />
-        <activity android:name=".optimize.OptimizeActivity" />
-        <activity android:name=".multimedia.MultimediaActivity" />
-        <activity android:name=".LBS.LBSActivity" />
-        <activity android:name=".payment.PaymentActivity"></activity>
+        <activity
+            android:name=".customview.CustomViewActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".designpattern.DesignPatternActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".ui.UIActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".optimize.OptimizeActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".multimedia.MultimediaActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".LBS.LBSActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".payment.PaymentActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".qrcode.QRCodeActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity android:name=".qrcode.ScanQRCodeActivity" />
+        <activity
+            android:name=".qrcode.GenerateQRCodeActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".multimedia.AudioActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".multimedia.VideoActivity"
+            android:theme="@style/AppTheme.Transparent" />
     </application>
 
 </manifest>

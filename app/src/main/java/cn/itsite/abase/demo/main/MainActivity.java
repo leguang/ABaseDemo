@@ -26,6 +26,7 @@ import cn.itsite.abase.demo.designpattern.DesignPatternActivity;
 import cn.itsite.abase.demo.multimedia.MultimediaActivity;
 import cn.itsite.abase.demo.optimize.OptimizeActivity;
 import cn.itsite.abase.demo.payment.PaymentActivity;
+import cn.itsite.abase.demo.qrcode.QRCodeActivity;
 import cn.itsite.abase.demo.ui.UIActivity;
 import cn.itsite.abase.mvp.view.base.BaseActivity;
 
@@ -56,6 +57,8 @@ public class MainActivity extends BaseActivity {
         list.add(new MainBean("优化", "优化相关实践"));
         list.add(new MainBean("多媒体", "与音频+视频相关的Demo"));
         list.add(new MainBean("LBS", "与地图+定位相关的Demo"));
+        list.add(new MainBean("支付", "与各个支付平台相关的Demo+适当的封装"));
+        list.add(new MainBean("二维码", "与二维码相关功能的集成和使用"));
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new MainRVAdapter(R.layout.item_rv_main_activity, list);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -104,6 +107,11 @@ public class MainActivity extends BaseActivity {
 
                     case Constants.PAYMENT:
                         mIntent = new Intent(MainActivity.this, PaymentActivity.class);
+
+                        break;
+
+                    case Constants.QRCODE:
+                        mIntent = new Intent(MainActivity.this, QRCodeActivity.class);
 
                         break;
                 }
