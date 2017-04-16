@@ -85,6 +85,8 @@
         <activity
             android:name=".multimedia.VideoActivity"
             android:theme="@style/AppTheme.Transparent" />
+        <activity android:name=".webview.WebViewActivity" />
+        <activity android:name=".test.TestActivity"></activity>
     </application>
 
 </manifest>

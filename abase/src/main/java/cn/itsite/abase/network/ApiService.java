@@ -1,4 +1,4 @@
-package cn.itsite.abase.mvp.model;
+package cn.itsite.abase.network;
 
 
 /**

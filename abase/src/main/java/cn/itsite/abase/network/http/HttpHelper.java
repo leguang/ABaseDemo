@@ -1,4 +1,4 @@
-package cn.itsite.abase.mvp.model;
+package cn.itsite.abase.network.http;
 
 import android.text.TextUtils;
 
@@ -9,14 +9,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cn.itsite.abase.BuildConfig;
 import cn.itsite.abase.common.Configuration;
 import cn.itsite.abase.common.Constants;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

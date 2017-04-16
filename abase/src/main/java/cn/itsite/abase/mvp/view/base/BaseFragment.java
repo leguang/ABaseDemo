@@ -4,19 +4,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+
 
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
 import cn.itsite.abase.utils.ScreenUtils;
-import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 /**
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
+ * <p>
+ * 所有Fragment的基类。将Fragment作为View层对象，专职处理View的试图渲染和事件。
  */
-public abstract class BaseFragment<P extends BaseContract.Presenter> extends SupportFragment {
-    private final String TAG = this.getClass().getName();
+public abstract class BaseFragment<P extends BaseContract.Presenter> extends SwipeBackFragment {
+    private final String TAG = BaseFragment.class.getSimpleName();
     public P mPresenter;
 
     @Override
@@ -43,8 +47,9 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Sup
 
     @Override
     public void onDestroy() {
+        ALog.e(TAG + "onDestroy()");
         if (mPresenter != null) {
-            mPresenter.detachView();
+            mPresenter.clear();
             mPresenter = null;
         }
         super.onDestroy();
@@ -62,6 +67,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Sup
             view.setPadding(view.getPaddingLeft(),
                     view.getPaddingTop() + ScreenUtils.getStatusBarHeight(_mActivity),
                     view.getPaddingRight(), view.getPaddingBottom());
+            Log.e("状态栏：", "状态栏：" + ScreenUtils.getStatusBarHeight(_mActivity) + "");
         }
     }
 }

@@ -1,12 +1,10 @@
 package cn.itsite.abase.mvp.view.base;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.view.WindowManager;
+
 
 import cn.itsite.abase.common.ActivityManager;
 import cn.itsite.abase.log.ALog;
@@ -20,7 +18,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * Email：langmanleguang@qq.com
  */
 public abstract class BaseActivity<P extends BaseContract.Presenter> extends SwipeBackActivity {
-    private final String TAG = this.getClass().getName();
+    private final String TAG = BaseActivity.class.getSimpleName();
+
     public P mPresenter;
 
     @Override
@@ -54,18 +53,18 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
 
     public void netWorkTips() {
         if (!NetworkUtils.isConnected(getApplicationContext())) {
-            View view = getWindow().getDecorView();
-            Snackbar mSnackbar = Snackbar.make(view, "当前网络已断开！", Snackbar.LENGTH_LONG)
-                    .setAction("设置网络", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // 跳转到系统的网络设置界面
-                            NetworkUtils.openSetting(BaseActivity.this);
-                        }
-                    });
-            View v = mSnackbar.getView();
-            v.setBackgroundColor(Color.parseColor("#FFCC00"));
-            mSnackbar.show();
+//            View view = getWindow().getDecorView();
+//            Snackbar mSnackbar = Snackbar.make(view, "当前网络已断开！", Snackbar.LENGTH_LONG)
+//                    .setAction("设置网络", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            // 跳转到系统的网络设置界面
+//                            NetworkUtils.openSetting(BaseActivity.this);
+//                        }
+//                    });
+//            View v = mSnackbar.getView();
+//            v.setBackgroundColor(Color.parseColor("#FFCC00"));
+//            mSnackbar.show();
         }
     }
 
@@ -81,8 +80,10 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
 
     @Override
     protected void onDestroy() {
+        ALog.e(TAG + "onDestroy()");
+
         if (mPresenter != null) {
-            mPresenter.detachView();
+            mPresenter.clear();
             mPresenter = null;
         }
         //把每一个Activity弹出栈
