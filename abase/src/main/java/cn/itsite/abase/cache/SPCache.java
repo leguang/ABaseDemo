@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 public class SPCache {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = SPCache.class.getSimpleName();
 
     private SPCache() {
         throw new UnsupportedOperationException("cannot be instantiated");

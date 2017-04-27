@@ -11,7 +11,7 @@ import cn.itsite.abase.log.ALog;
  */
 
 public class MemoryCache implements ICache {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = MemoryCache.class.getSimpleName();
     private LruCache<String, Object> cache;
     private static MemoryCache instance;
 

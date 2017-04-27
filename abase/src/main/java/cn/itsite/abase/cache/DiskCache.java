@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  */
 
 public class DiskCache implements ICache {
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = DiskCache.class.getSimpleName();
     private DiskLruCache cache;
     static String TAG_CACHE = "=====createTime{createTime_v}expireMills{expireMills_v}";
     static String REGEX = "=====createTime\\{(\\d{1,})\\}expireMills\\{(\\d{1,})\\}";

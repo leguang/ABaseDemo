@@ -98,7 +98,7 @@ import java.util.concurrent.TimeUnit;
  * responding appropriately.
  */
 public final class DiskLruCache implements Closeable {
-    private final String TAG = DiskLruCache.class.getName();
+    private final String TAG = DiskLruCache.class.getSimpleName();
     static final String JOURNAL_FILE = "journal";
     static final String JOURNAL_FILE_TMP = "journal.tmp";
     static final String MAGIC = "libcore.io.DiskLruCache";

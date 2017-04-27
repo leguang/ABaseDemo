@@ -6,7 +6,7 @@ package cn.itsite.abase.common;
  * Email：langmanleguang@qq.com
  */
 public class Constants {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = Constants.class.getSimpleName();
     /**
      * 不允许new
      */

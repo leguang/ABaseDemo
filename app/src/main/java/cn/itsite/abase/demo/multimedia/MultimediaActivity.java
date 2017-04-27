@@ -20,6 +20,8 @@ public class MultimediaActivity extends BaseActivity {
     Button btAudio;
     @BindView(R.id.bt_video)
     Button btVideo;
+    @BindView(R.id.bt_picture)
+    Button btPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,16 @@ public class MultimediaActivity extends BaseActivity {
         initToolbar(toolbar);
     }
 
-    @OnClick({R.id.bt_audio, R.id.bt_video})
+    @OnClick({R.id.bt_audio, R.id.bt_video, R.id.bt_picture})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.bt_picture:
+/**
+ * 考虑使用鲁班来优化图片
+ * 多媒体中增加一个图片系列，有压缩，优化，框架使用，相册，自定义相册
+ */
+                break;
+
             case R.id.bt_audio:
                 startActivity(new Intent(this, AudioActivity.class));
                 break;

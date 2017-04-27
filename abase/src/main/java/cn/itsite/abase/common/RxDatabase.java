@@ -5,6 +5,6 @@ package cn.itsite.abase.common;
  * Email：langmanleguang@qq.com
  */
 public class RxDatabase {
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = RxDatabase.class.getSimpleName();
 
 }
