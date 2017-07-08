@@ -4,13 +4,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
 import android.view.View;
 
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
 import cn.itsite.abase.utils.ScreenUtils;
-import cn.itsite.abase.widget.Dialog.LoadingDialog;
+import cn.itsite.abase.widget.dialog.LoadingDialog;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;

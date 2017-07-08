@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import cn.itsite.abase.R;
 
-
 /**
  * Author：leguang on 2017/4/12 0009 15:49
  * Email：langmanleguang@qq.com
