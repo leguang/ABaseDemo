@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MoreTextStyle">
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="maxLine" format="integer" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="AutoScrollHeight">
+        <attr name="size" format="dimension" />
+        <attr name="padding" format="dimension" />
+        <attr name="animDuration" format="integer" />
+        <attr name="scrollDuration" format="integer" />
+        <attr name="color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="StateLayout">
+        <attr name="loadingLayout" format="reference" />
+        <attr name="errorLayout" format="reference" />
+        <attr name="netErrorLayout" format="reference" />
+        <attr name="emptyLayout" format="reference" />
+    </declare-styleable>
+</resources>

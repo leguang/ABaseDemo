@@ -1,6 +1,5 @@
 package cn.itsite.abase.network.http;
 
-import com.aglhz.abase.log.ALog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +7,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import cn.itsite.abase.log.ALog;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;

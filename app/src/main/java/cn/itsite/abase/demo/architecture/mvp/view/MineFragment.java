@@ -1,11 +1,8 @@
 package cn.itsite.abase.demo.architecture.mvp.view;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,16 +38,5 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-
-    @Override
-    public void end(Object response) {
-
-    }
-
-    @Override
-    public void error(Throwable t) {
-
     }
 }

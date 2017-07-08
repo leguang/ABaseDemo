@@ -13,7 +13,7 @@ public class BluetoothActivity extends BaseActivity {
         setContentView(R.layout.activity_bluetooth);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fl_bluetooth_activity, BluetoothFragment.newInstance())
+//                .replace(R.id.fl_bluetooth_activity, BluetoothFragment.newInstance())
                 .commit();
     }
 }

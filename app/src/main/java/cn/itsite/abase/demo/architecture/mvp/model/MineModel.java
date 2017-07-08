@@ -13,8 +13,4 @@ import cn.itsite.abase.mvp.model.base.BaseModel;
 public class MineModel extends BaseModel implements MineContract.Model {
     private final String TAG = MineModel.class.getSimpleName();
 
-    @Override
-    public void start() {
-        ALog.e(TAG + "start()");
-    }
 }

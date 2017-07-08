@@ -15,8 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.aglhz.abase.R;
-import com.aglhz.abase.log.ALog;
+import cn.itsite.abase.R;
+import cn.itsite.abase.log.ALog;
+
 
 /**
  * Author：leguang on 2017/4/12 0009 15:49

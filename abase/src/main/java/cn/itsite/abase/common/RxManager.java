@@ -1,40 +1,40 @@
 package cn.itsite.abase.common;
 
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Author：Administrator on 2016/10/9 0009 10:35
  * Email：langmanleguang@qq.com
  */
 public class RxManager {
-    private final String TAG = RxManager.class.getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     /**
      * 管理Observables 和 Subscribers订阅
      */
-    private CompositeSubscription mCompositeSubscription = new CompositeSubscription();
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     /**
      * 单纯的Observables 和 Subscribers管理
      *
-     * @param m
+     * @param disposable
      */
-    public void add(Subscription m) {
+    public void add(Disposable disposable) {
         /*订阅管理*/
-        if (mCompositeSubscription == null) {
-            mCompositeSubscription = new CompositeSubscription();
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
         }
-        mCompositeSubscription.add(m);
+        mCompositeDisposable.add(disposable);
     }
 
     /**
      * 单个presenter生命周期结束，取消订阅
      */
     public void clear() {
-        if (mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            // 取消所有订阅
-            mCompositeSubscription.unsubscribe();
+        if (mCompositeDisposable != null && mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.clear();
         }
     }
 }

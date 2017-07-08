@@ -115,7 +115,7 @@ public class ActivityManager {
     /**
      * 退出应用程序
      */
-    public void appExit() {
+    public void exit() {
         try {
             finishAllActivity();
 

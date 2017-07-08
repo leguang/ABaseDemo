@@ -1,13 +1,12 @@
 package cn.itsite.abase.network.http;
 
-import com.aglhz.abase.log.ALog;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import cn.itsite.abase.log.ALog;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -49,7 +48,6 @@ public class LogInterceptor implements Interceptor {
                     jsonObject.toString()));
             String code = jsonOther.optString("code");
             if ("123".equals(code)) {
-                EventBus.getDefault().post(new LogInterceptor());
             }
 
         } catch (JSONException e) {

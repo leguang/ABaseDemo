@@ -11,7 +11,7 @@ public interface MineContract {
     interface View extends BaseContract.View {
     }
 
-    interface Presenter<T> extends BaseContract.Presenter<T> {
+    interface Presenter extends BaseContract.Presenter {
     }
 
     interface Model extends BaseContract.Model {

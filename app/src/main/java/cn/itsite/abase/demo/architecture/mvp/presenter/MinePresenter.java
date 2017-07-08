@@ -11,20 +11,10 @@ import cn.itsite.abase.mvp.presenter.base.BasePresenter;
  * 负责邻里模块Presenter层内容。
  */
 
-public class MinePresenter extends BasePresenter<MineContract.View, MineContract.Model> implements MineContract.Presenter<String> {
+public class MinePresenter extends BasePresenter<MineContract.View, MineContract.Model> implements MineContract.Presenter {
     private final String TAG = MinePresenter.class.getSimpleName();
 
     public MinePresenter(MineContract.View mView) {
         super(mView);
-    }
-
-    /**
-     * Presenter的生命周期开始。
-     *
-     * @param s
-     */
-    @Override
-    public String start(String s) {
-        return null;
     }
 }

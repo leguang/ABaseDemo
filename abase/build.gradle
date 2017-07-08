@@ -25,23 +25,26 @@ dependencies {
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:multidex:1.0.1'
 
-    //Rx系列
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
+    //RxJava2系列
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.9'
     //retrofit2系列
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'  这个支持有问题，改用下面的。
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.0-RC1'
-    compile 'com.google.code.gson:gson:2.6.2'
+    //谷歌json框架
+    compile 'com.google.code.gson:gson:2.7'
 
     //fragment操作库
-    compile 'me.yokeyword:fragmentation:0.10.1'
-    compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
-
+    compile 'me.yokeyword:fragmentation:0.10.4'
+    // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库
+    compile 'me.yokeyword:fragmentation-swipeback:0.10.4'
     //图片加载
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
 
-    //一个不错的RecyclerViewAdapter辅助
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.0'
+    //一个不错的RecyclerViewAdapter辅助框架
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.16'
 }
