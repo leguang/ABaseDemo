@@ -1,16 +1,13 @@
 package cn.itsite.abase.exception;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,22 +22,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import cn.itsite.abase.common.ActivityManager;
-import cn.itsite.abase.log.ALog;
-
 /**
+ * Author：leguang on 2016/10/9 0009 15:49
+ * Email：langmanleguang@qq.com
+ * <p>
  * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
- * public class AndroidUtilsApplication extends Application {
- * public void onCreate() {
- * super.onCreate();
- * //崩溃处理
- * CrashHandlerUtil crashHandlerUtil = CrashHandlerUtil.getInstance();
- * crashHandlerUtil.init(this);
- * crashHandlerUtil.setCrashTip("很抱歉，程序出现异常，即将退出！");
- * }
- * }
- * Created by Administrator
- * on 2016/5/19.
  */
 @SuppressWarnings("unused")
 public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
@@ -57,23 +43,30 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     //用于格式化日期,作为日志文件名的一部分
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.CHINA);
-    private String crashTip = "很抱歉，程序出现异常，即将退出！";
-
-    public String getCrashTip() {
-        return crashTip;
-    }
-
-    public void setCrashTip(String crashTip) {
-        this.crashTip = crashTip;
-    }
 
     /**
      * 保证只有一个CrashHandler实例
      */
-    private AppExceptionHandler(Context mContext) {
+    private AppExceptionHandler(final Context mContext) {
         this.mContext = mContext;
         //获取系统默认的UncaughtException处理器
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true) {
+                    try {
+                        Looper.loop();//主线程都异常都被try catch掉了。
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                        collectDeviceInfo(mContext);
+                        saveCrashInfo2File(throwable);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -91,15 +84,19 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 当UncaughtException发生时会转入该函数来处理
      *
-     * @param thread 线程
-     * @param ex     异常
+     * @param thread    线程
+     * @param throwable 异常
      */
     @Override
-    public void uncaughtException(Thread thread, Throwable ex) {
-        if (!handleException(ex) && mDefaultHandler != null) {
-            //如果用户没有处理则让系统默认的异常处理器来处理
-            mDefaultHandler.uncaughtException(thread, ex);
-        }
+    public void uncaughtException(Thread thread, Throwable throwable) {
+
+        //由于主线程的异常都被try catch掉了，能被捕获到这里的都是子线程异常。这样保存信息什么的都不需要开启线程。
+        handleException(throwable);
+
+//        if (mDefaultHandler != null) {
+        //如果用户没有处理则让系统默认的异常处理器来处理
+//            mDefaultHandler.uncaughtException(thread, throwable);
+//        }
     }
 
     /**
@@ -108,60 +105,23 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
      * @param throwable 异常
      * @return true:如果处理了该异常信息;否则返回false.
      */
-    private boolean handleException(final Throwable throwable) {
+    private void handleException(final Throwable throwable) {
+
         if (throwable == null || mContext == null) {
-            return false;
+            return;
         }
 
-        boolean isSuccess = true;
         try {
             //收集设备参数信息
             collectDeviceInfo(mContext);
             //保存日志文件
-            isSuccess = saveCrashInfo2File(throwable);
+            saveCrashInfo2File(throwable);
+            Log.e(TAG, "Save end.");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         } finally {
-            if (!isSuccess) {
-                return false;
-            } else {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        //弹出Dialog提示用户退出App或重启App
-                        showDialog();
-                        Looper.loop();
-                    }
-                }.start();
-            }
+//            ActivityManager.getInstance().appExit();
         }
-        return true;
-    }
-
-    private void showDialog() {
-        final Activity currentActivity = ActivityManager.getInstance().currentActivity();
-        new AlertDialog.Builder(currentActivity)
-                .setTitle("异常")
-                .setMessage("当前应用程序发生异常，请您选择退出应用或重启应用！")
-                .setCancelable(false)
-                .setNegativeButton("重启", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Intent intent = new Intent(mContext, SplashActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                        ActivityManager.getInstance().appExit();
-                        ALog.e("重启");
-                    }
-                })
-                .setPositiveButton("退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityManager.getInstance().appExit();
-                    }
-                }).show();
     }
 
     /**
@@ -226,7 +186,6 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
             String fileName = "crash-" + time + "-" + timestamp + ".log";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory().getPath() + "/crash/";
-                Log.e(TAG, "path=" + path);
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();

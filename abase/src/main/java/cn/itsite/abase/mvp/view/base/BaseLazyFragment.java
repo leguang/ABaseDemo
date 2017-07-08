@@ -11,7 +11,7 @@ import cn.itsite.abase.mvp.contract.base.BaseContract;
  * Email：langmanleguang@qq.com
  */
 public abstract class BaseLazyFragment<P extends BaseContract.Presenter> extends BaseFragment<P> {
-    private final String TAG = this.getClass().getSimpleName();
+    public final String TAG = this.getClass().getSimpleName();
     private boolean mInited = false;
     private Bundle mSavedInstanceState;
 

@@ -11,5 +11,8 @@ public class ArchitectureActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_architecture);
+        if (savedInstanceState == null) {
+//            loadRootFragment(R.id.fl_architecture_activity, HouseRightsFragment.newInstance());
+        }
     }
 }

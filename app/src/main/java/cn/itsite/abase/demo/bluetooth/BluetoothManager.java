@@ -11,7 +11,7 @@ import android.util.Log;
 import java.util.concurrent.TimeUnit;
 
 import cn.itsite.abase.cache.SPCache;
-import cn.itsite.abase.demo.BaseApplication;
+import cn.itsite.abase.demo.AppApplication;
 import cn.itsite.abase.demo.R;
 import cn.itsite.abase.demo.bluetooth.classic.ClassicBluetooth;
 import cn.itsite.abase.demo.bluetooth.le.LeBluetooth;
@@ -57,11 +57,11 @@ public class BluetoothManager {
     }
 
     public void switch2Classic() {
-        this.mBluetooth = ClassicBluetooth.newInstance(BaseApplication.mContext);
+        this.mBluetooth = ClassicBluetooth.newInstance(AppApplication.mContext);
     }
 
     public void switch2Le() {
-        this.mBluetooth = LeBluetooth.newInstance(BaseApplication.mContext);
+        this.mBluetooth = LeBluetooth.newInstance(AppApplication.mContext);
     }
 
     public void setListener(BluetoothListener mListener) {
@@ -80,7 +80,7 @@ public class BluetoothManager {
             mBluetooth.open();
         }
 
-        final String strAddress = (String) SPCache.get(BaseApplication.mContext, Constants.BLUETOOTH_ADDRESS, "");
+        final String strAddress = (String) SPCache.get(AppApplication.mContext, Constants.BLUETOOTH_ADDRESS, "");
         if (!TextUtils.isEmpty(strAddress)) {
             Log.e(TAG,"连接:" + strAddress);
             //要延迟连接，因为一进某个页面就打开蓝牙，蓝牙还没完全打开就连接会连接不上。

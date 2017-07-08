@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.itsite.abase.cache.SPCache;
-import cn.itsite.abase.demo.BaseApplication;
+import cn.itsite.abase.demo.AppApplication;
 import cn.itsite.abase.demo.R;
 import cn.itsite.abase.demo.common.Constants;
 import cn.itsite.abase.demo.common.DialogHelper;
@@ -85,7 +85,7 @@ public class BluetoothFragment extends BaseFragment {
         toolbar.setTitle("蓝牙调试");
         mAdapter = new ArrayAdapter<>(_mActivity, android.R.layout.simple_list_item_1, listResponse);
         lvResponses.setAdapter(mAdapter);
-        mBluetoothManager = BluetoothManager.newInstance(BaseApplication.mContext);
+        mBluetoothManager = BluetoothManager.newInstance(AppApplication.mContext);
         mBluetoothManager.open();
         mBluetoothManager.setListener(mListener);
     }
@@ -140,7 +140,7 @@ public class BluetoothFragment extends BaseFragment {
 
         @Override
         public void onConnected(BluetoothDevice device) {
-            SPCache.put(BaseApplication.mContext, Constants.BLUETOOTH_ADDRESS, device.getAddress());
+            SPCache.put(AppApplication.mContext, Constants.BLUETOOTH_ADDRESS, device.getAddress());
             DialogHelper.successSnackbar(viewGroup, "已连接:" + device.getName());
             tvPaired.setVisibility(View.GONE);
             tvScan.setVisibility(View.GONE);

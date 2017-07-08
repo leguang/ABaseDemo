@@ -1,7 +1,10 @@
 package cn.itsite.abase.network.http;
 
-
 import com.aglhz.abase.log.ALog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -15,12 +18,11 @@ import okio.BufferedSource;
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public class LoggingInterceptor implements Interceptor {
-    private static final String TAG = LoggingInterceptor.class.getSimpleName();
+public class LogInterceptor implements Interceptor {
+    private static final String TAG = LogInterceptor.class.getSimpleName();
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-
         Request request = chain.request();
         long t1 = System.nanoTime();
 
@@ -28,7 +30,7 @@ public class LoggingInterceptor implements Interceptor {
         if (request.body() != null)
             request.body().writeTo(buffer);
 
-        ALog.e( String.format("Sending request %s on %s%n%sRequest Params: %s",
+        ALog.e(String.format("Sending request %s on %s%n%sRequest Params: %s",
                 request.url(), chain.connection(), request.headers(), buffer.clone().readUtf8()));
         buffer.close();
 
@@ -38,11 +40,22 @@ public class LoggingInterceptor implements Interceptor {
         BufferedSource source = response.body().source();
         source.request(Long.MAX_VALUE);
         buffer = source.buffer().clone();
-        ALog.e(String.format("Received response for %s%nin %.1fms%n%sResponse Json: %s",
-                response.request().url(), (t2 - t1) / 1e6d, response.headers(),
-                buffer.readUtf8()));
-        buffer.close();
 
+        try {
+            JSONObject jsonObject = new JSONObject(buffer.readUtf8());
+            JSONObject jsonOther = jsonObject.optJSONObject("other");
+            ALog.e(String.format("Received response for %s%nin %.1fms%n%sResponse Json: %s",
+                    response.request().url(), (t2 - t1) / 1e6d, response.headers(),
+                    jsonObject.toString()));
+            String code = jsonOther.optString("code");
+            if ("123".equals(code)) {
+                EventBus.getDefault().post(new LogInterceptor());
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        buffer.close();
         return response;
     }
 }

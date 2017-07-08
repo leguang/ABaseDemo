@@ -1,8 +1,10 @@
 package cn.itsite.abase.network.http;
 
+
 import java.io.IOException;
 
 import cn.itsite.abase.log.ALog;
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -19,9 +21,9 @@ public class CacheInterceptor implements Interceptor {
         Request request = chain.request();
 
 //        if (!NetworkUtils.isConnected(BaseApplication.mContext)) {
-//            request = request.newBuilder()
-//                    .cacheControl(CacheControl.FORCE_CACHE)
-//                    .build();
+        request = request.newBuilder()
+                .cacheControl(CacheControl.FORCE_CACHE)
+                .build();
 //        }
         int tryCount = 0;
 

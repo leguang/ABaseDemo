@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.WindowManager;
 
-
 import cn.itsite.abase.common.ActivityManager;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
-import cn.itsite.abase.utils.NetworkUtils;
+import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 
@@ -17,8 +17,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public abstract class BaseActivity<P extends BaseContract.Presenter> extends SwipeBackActivity {
-    private final String TAG = BaseActivity.class.getSimpleName();
+public abstract class BaseActivity<P extends BaseContract.Presenter> extends SwipeBackActivity implements BaseContract.View {
+    public final String TAG = BaseActivity.class.getSimpleName();
 
     public P mPresenter;
 
@@ -27,7 +27,6 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
         super.onCreate(savedInstanceState);
         initActivity();
         initStateBar();
-        netWorkTips();
         mPresenter = createPresenter();
     }
 
@@ -35,6 +34,8 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
         if (Build.VERSION_CODES.KITKAT <= Build.VERSION.SDK_INT) {
             // 透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //实现透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
     }
 
@@ -51,23 +52,6 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
         ALog.e(TAG);
     }
 
-    public void netWorkTips() {
-        if (!NetworkUtils.isConnected(getApplicationContext())) {
-//            View view = getWindow().getDecorView();
-//            Snackbar mSnackbar = Snackbar.make(view, "当前网络已断开！", Snackbar.LENGTH_LONG)
-//                    .setAction("设置网络", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            // 跳转到系统的网络设置界面
-//                            NetworkUtils.openSetting(BaseActivity.this);
-//                        }
-//                    });
-//            View v = mSnackbar.getView();
-//            v.setBackgroundColor(Color.parseColor("#FFCC00"));
-//            mSnackbar.show();
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -80,7 +64,6 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
 
     @Override
     protected void onDestroy() {
-        ALog.e(TAG + "onDestroy()");
 
         if (mPresenter != null) {
             mPresenter.clear();
@@ -89,5 +72,30 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
         //把每一个Activity弹出栈
         ActivityManager.getInstance().removeActivity(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultNoAnimator();
+    }
+
+    /**
+     * 用于被P层调用的通用函数。
+     *
+     * @param response
+     */
+    @Override
+    public void start(Object response) {
+
+    }
+
+    /**
+     * 用于被P曾调用的通用函数。
+     *
+     * @param errorMessage P层传递过来的错误信息显示给用户。
+     */
+    @Override
+    public void error(String errorMessage) {
+
     }
 }

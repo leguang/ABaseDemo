@@ -8,17 +8,16 @@ import com.google.gson.internal.bind.TypeAdapters;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import cn.itsite.abase.BuildConfig;
-import cn.itsite.abase.common.Configuration;
 import cn.itsite.abase.common.Constants;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -26,33 +25,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Email：langmanleguang@qq.com
  */
 public class HttpHelper {
-    private final String TAG = this.getClass().getSimpleName();
-    public static final String BASE_URL = Constants.BASE_URL;
+    public static final String TAG = HttpHelper.class.getSimpleName();
+    public static String BASE_URL = "http://www.aglhz.com:8090";
     private static OkHttpClient mOkHttpClient;
     private static Retrofit mRetrofit;
-    private volatile static HttpHelper INSTANCE;
+    private static final int TIMEOUT = 35;
 
     //构造方法私有
     private HttpHelper() {
         initRetrofit();
     }
 
-    //获取单例
-    public static <T> T getInstance(Class<T> c) {
-        if (INSTANCE == null) {
-            synchronized (HttpHelper.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new HttpHelper();
-                }
-            }
-        }
-        return INSTANCE.initService(c);
-    }
-
     /**
      * 初始化OkHttp
      */
-    private void initOkHttpClient() {
+    private static void initOkHttpClient() {
         if (null == mOkHttpClient) {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -60,33 +47,24 @@ public class HttpHelper {
                 builder.interceptors().clear();
             }
 
+            File cacheFile = new File(Constants.PATH_NET_CACHE);
+            Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
+
+            //设置缓存
+            builder.cache(cache);
             //设置超时
-            builder.connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-            builder.readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-            builder.writeTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+            builder.connectTimeout(TIMEOUT, TimeUnit.SECONDS);
+            builder.readTimeout(TIMEOUT, TimeUnit.SECONDS);
+            builder.writeTimeout(TIMEOUT, TimeUnit.SECONDS);
             //错误重连
             builder.retryOnConnectionFailure(true);
 
-            //DEBUG模式下配Log拦截器
-            if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                builder.addInterceptor(loggingInterceptor);
-            }
-
-//            builder.addNetworkInterceptor();
-
-            if (Configuration.isShowNetworkParams()) {
-                builder.addInterceptor(new LoggingInterceptor());
-            }
+            builder.addInterceptor(new LogInterceptor());
             mOkHttpClient = builder.build();
         }
     }
 
-    /**
-     * 初始化Retrofit
-     */
-    private void initRetrofit() {
+    private static void initRetrofit() {
         if (null == mRetrofit) {
             initOkHttpClient();
 
@@ -166,19 +144,16 @@ public class HttpHelper {
                     .baseUrl(BASE_URL)
                     .client(mOkHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
     }
 
-    /**
-     * 根据传入的接口类获取Retrofit的相应服务
-     *
-     * @param c   Retrofit的API接口
-     * @param <T> 返回的服务类型
-     * @return 返回的服务类型
-     */
-    public <T> T initService(Class<T> c) {
-        return mRetrofit.create(c);
+    public static <T> T getService(Class<T> t) {
+        if (mRetrofit == null) {
+            initRetrofit();
+        }
+
+        return mRetrofit.create(t);
     }
 }

@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import cn.itsite.abase.BaseApplication;
 import cn.itsite.abase.log.ALog;
 
 
@@ -12,8 +13,8 @@ import cn.itsite.abase.log.ALog;
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public class BaseApplication extends Application implements Application.ActivityLifecycleCallbacks {
-    private static final String TAG = BaseApplication.class.getSimpleName();
+public class AppApplication extends BaseApplication implements Application.ActivityLifecycleCallbacks {
+    private static final String TAG = AppApplication.class.getSimpleName();
     public static Context mContext;
 
     @Override

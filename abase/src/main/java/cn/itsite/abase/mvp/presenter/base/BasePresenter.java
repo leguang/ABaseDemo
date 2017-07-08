@@ -3,14 +3,17 @@ package cn.itsite.abase.mvp.presenter.base;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 
+import org.json.JSONException;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
+import cn.itsite.abase.common.RxManager;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
-import cn.itsite.abase.mvp.model.base.BaseModel;
-import rx.Subscriber;
+import retrofit2.adapter.rxjava.HttpException;
 
 /**
  * Author：leguang on 2016/10/9 0009 10:31
@@ -18,11 +21,13 @@ import rx.Subscriber;
  * <p>
  * 所有Presenter类的基类，负责调度View层和Model层的交互。
  */
-public abstract class BasePresenter<V extends BaseContract.View, M extends BaseContract.Model> {
-    private final String TAG = BaseModel.class.getSimpleName();
+public class BasePresenter<V extends BaseContract.View, M extends BaseContract.Model> implements BaseContract.Presenter {
+    public final String TAG = BasePresenter.class.getSimpleName();
 
     public Reference<V> mViewReference;
     public M mModel;
+    //每一套mvp应该拥有一个独立的RxManager
+    public RxManager mRxManager = new RxManager();
 
     /**
      * 创建Presenter的时候就绑定View和创建model。
@@ -30,11 +35,11 @@ public abstract class BasePresenter<V extends BaseContract.View, M extends BaseC
      * @param mView 所要绑定的view层对象，一般在View层创建Presenter的时候通过this把自己传过来。
      */
     public BasePresenter(V mView) {
-        attachView(mView);
+        setView(mView);
         mModel = createModel();
     }
 
-    public void attachView(V view) {
+    public void setView(V view) {
         mViewReference = new WeakReference<V>(view);
     }
 
@@ -52,24 +57,33 @@ public abstract class BasePresenter<V extends BaseContract.View, M extends BaseC
         return null;
     }
 
-    public M getModel() {
-        return mModel;
-    }
-
-    public void setPresenter(@NonNull M model) {
+    public void setModel(@NonNull M model) {
         this.mModel = model;
     }
 
-    @UiThread
-    public void clear() {
-        ALog.e(TAG + "clear()");
+    /**
+     * 默认实现的接口，用于P层调用。
+     *
+     * @param request 传一些参数给P层。
+     */
+    @Override
+    public void start(Object request) {
 
-        //释放Model层对象，避免内存泄露
+    }
+
+    /**
+     * 优先释放Model层对象，避免内存泄露。
+     */
+    @UiThread
+    @Override
+    public void clear() {
         if (mModel != null) {
             mModel.clear();
             mModel = null;
         }
-
+        if (mRxManager != null) {
+            mRxManager.clear();
+        }
         //释放View层对象，避免内存泄露
         if (mViewReference != null) {
             mViewReference.clear();
@@ -77,33 +91,32 @@ public abstract class BasePresenter<V extends BaseContract.View, M extends BaseC
         }
     }
 
-    public abstract class RxSubscriber<T> extends Subscriber<T> {
+    /**
+     * P层通用函数，用于对异常的统一处理，并调用V层显示通知用户。
+     *
+     * @param throwable
+     */
+    public void error(Throwable throwable) {
 
-        @Override
-        public void onStart() {
-            super.onStart();
-            getView().start();
+        if (!isViewAttached()) {
+            return;
         }
-
-        @Override
-        public void onNext(T t) {
-            _onNext(t);
+        if (throwable == null) {
+            getView().error("数据异常");
+            return;
         }
-
-
-        @Override
-        public void onCompleted() {
-            getView().end();
+        if (throwable instanceof ConnectException) {
+            getView().error("网络异常");
+        } else if (throwable instanceof HttpException) {
+            getView().error("服务器异常");
+        } else if (throwable instanceof SocketTimeoutException) {
+            getView().error("连接超时");
+        } else if (throwable instanceof JSONException) {
+            getView().error("解析异常");
+        } else {
+            getView().error("数据异常");
         }
-
-        @Override
-        public void onError(Throwable e) {
-            e.printStackTrace();
-            //此处不考虑错误类型，笼统的以错误来介绍
-            getView().error(e);
-        }
-
-        public abstract void _onNext(T t);
-
+        throwable.printStackTrace();
+        ALog.e(TAG, throwable);
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public abstract class BaseRecyclerViewAdapter<T, K extends BaseViewHolder> extends BaseQuickAdapter<T, K> {
-
+    public final String TAG = BaseRecyclerViewAdapter.class.getSimpleName();
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
