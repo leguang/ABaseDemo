@@ -1,5 +1,6 @@
 package cn.itsite.abase.mvp.model.base;
 
+import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
 
 /**
@@ -16,7 +17,7 @@ public class BaseModel implements BaseContract.Model {
      */
     @Override
     public void start(Object request) {
-
+        ALog.e(TAG, "start");
     }
 
     /**

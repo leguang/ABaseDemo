@@ -69,7 +69,7 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
      */
     @Override
     public void start(Object request) {
-
+        ALog.e(TAG, "start");
     }
 
     /**

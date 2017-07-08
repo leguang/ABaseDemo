@@ -31,13 +31,12 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
     private final String TAG = AppExceptionHandler.class.getName();
-
     //系统默认的UncaughtException处理类
     private Thread.UncaughtExceptionHandler mDefaultHandler;
     //CrashHandler实例
     private static AppExceptionHandler instance;
     //程序的Context对象
-    private Context mContext;
+    private Context context;
     //用来存储设备信息和异常信息
     private Map<String, String> infos = new HashMap<>();
 
@@ -47,8 +46,8 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 保证只有一个CrashHandler实例
      */
-    private AppExceptionHandler(final Context mContext) {
-        this.mContext = mContext;
+    private AppExceptionHandler(final Context context) {
+        this.context = context;
         //获取系统默认的UncaughtException处理器
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 
@@ -61,7 +60,7 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
                         Looper.loop();//主线程都异常都被try catch掉了。
                     } catch (Throwable throwable) {
                         throwable.printStackTrace();
-                        collectDeviceInfo(mContext);
+                        collectDeviceInfo(context);
                         saveCrashInfo2File(throwable);
                     }
                 }
@@ -94,7 +93,7 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
         handleException(throwable);
 
 //        if (mDefaultHandler != null) {
-        //如果用户没有处理则让系统默认的异常处理器来处理
+//            如果用户没有处理则让系统默认的异常处理器来处理,系统默认处理就会弹出对话框，并推出程序。
 //            mDefaultHandler.uncaughtException(thread, throwable);
 //        }
     }
@@ -107,13 +106,13 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
      */
     private void handleException(final Throwable throwable) {
 
-        if (throwable == null || mContext == null) {
+        if (throwable == null || context == null) {
             return;
         }
 
         try {
             //收集设备参数信息
-            collectDeviceInfo(mContext);
+            collectDeviceInfo(context);
             //保存日志文件
             saveCrashInfo2File(throwable);
             Log.e(TAG, "Save end.");
@@ -127,12 +126,15 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 收集设备参数信息
      *
-     * @param ctx 上下文
+     * @param context 上下文
      */
-    public void collectDeviceInfo(Context ctx) {
+    public void collectDeviceInfo(Context context) {
+        if (context == null) {
+            return;
+        }
         try {
-            PackageManager pm = ctx.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_ACTIVITIES);
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
             if (pi != null) {
                 String versionName = pi.versionName == null ? "null" : pi.versionName;
                 String versionCode = pi.versionCode + "";

@@ -2,6 +2,7 @@ package cn.itsite.abase.demo.architecture.model;
 
 
 import cn.itsite.abase.demo.architecture.contract.MineContract;
+import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.model.base.BaseModel;
 
 /**
@@ -12,4 +13,9 @@ import cn.itsite.abase.mvp.model.base.BaseModel;
 public class MineModel extends BaseModel implements MineContract.Model {
     private final String TAG = MineModel.class.getSimpleName();
 
+    @Override
+    public void start(Object request) {
+        super.start(request);
+        ALog.e(TAG, "start");
+    }
 }

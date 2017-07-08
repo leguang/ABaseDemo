@@ -1,7 +1,11 @@
 package cn.itsite.abase.demo.architecture.presenter;
 
 
+import android.support.annotation.NonNull;
+
 import cn.itsite.abase.demo.architecture.contract.MineContract;
+import cn.itsite.abase.demo.architecture.model.MineModel;
+import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.presenter.base.BasePresenter;
 
 /**
@@ -16,5 +20,20 @@ public class MinePresenter extends BasePresenter<MineContract.View, MineContract
 
     public MinePresenter(MineContract.View mView) {
         super(mView);
+    }
+
+    @NonNull
+    @Override
+    protected MineContract.Model createModel() {
+        return new MineModel();
+    }
+
+    @Override
+    public void start(Object request) {
+        super.start(request);
+        ALog.e(TAG, "start");
+
+        mModel.start("");
+        getView().start("");
     }
 }

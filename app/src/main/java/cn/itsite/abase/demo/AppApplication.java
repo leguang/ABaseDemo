@@ -15,16 +15,11 @@ import cn.itsite.abase.log.ALog;
  */
 public class AppApplication extends BaseApplication implements Application.ActivityLifecycleCallbacks {
     private static final String TAG = AppApplication.class.getSimpleName();
-    public static Context mContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = this;
-//        Thread.setDefaultUncaughtExceptionHandler(AppExceptionHandler.getInstance(this));
-//        registerActivityLifecycleCallbacks(this);
-        ALog.init(true, "ABase");
-
+        registerActivityLifecycleCallbacks(this);
     }
 
     @Override
