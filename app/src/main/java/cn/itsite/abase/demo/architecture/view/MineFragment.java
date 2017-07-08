@@ -1,4 +1,4 @@
-package cn.itsite.abase.demo.architecture.mvp.view;
+package cn.itsite.abase.demo.architecture.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import cn.itsite.abase.demo.architecture.mvp.contract.MineContract;
-import cn.itsite.abase.demo.architecture.mvp.presenter.MinePresenter;
+import cn.itsite.abase.demo.architecture.contract.MineContract;
+import cn.itsite.abase.demo.architecture.presenter.MinePresenter;
 import cn.itsite.abase.mvp.view.base.BaseFragment;
+
 
 /**
  * Author: LiuJia on 2017/4/21 14:25.

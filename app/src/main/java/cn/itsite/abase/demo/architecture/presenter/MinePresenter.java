@@ -1,7 +1,7 @@
-package cn.itsite.abase.demo.architecture.mvp.presenter;
+package cn.itsite.abase.demo.architecture.presenter;
 
 
-import cn.itsite.abase.demo.architecture.mvp.contract.MineContract;
+import cn.itsite.abase.demo.architecture.contract.MineContract;
 import cn.itsite.abase.mvp.presenter.base.BasePresenter;
 
 /**

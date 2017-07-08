@@ -1,4 +1,5 @@
-package cn.itsite.abase.demo.architecture.mvp.contract;
+package cn.itsite.abase.demo.architecture.contract;
+
 
 import cn.itsite.abase.mvp.contract.base.BaseContract;
 

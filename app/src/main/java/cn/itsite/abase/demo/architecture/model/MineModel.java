@@ -1,8 +1,7 @@
-package cn.itsite.abase.demo.architecture.mvp.model;
+package cn.itsite.abase.demo.architecture.model;
 
 
-import cn.itsite.abase.demo.architecture.mvp.contract.MineContract;
-import cn.itsite.abase.log.ALog;
+import cn.itsite.abase.demo.architecture.contract.MineContract;
 import cn.itsite.abase.mvp.model.base.BaseModel;
 
 /**
