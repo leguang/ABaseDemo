@@ -3,7 +3,7 @@ package cn.itsite.abase.demo.common;
 
 import java.io.File;
 
-import cn.itsite.abase.demo.AppApplication;
+import cn.itsite.abase.demo.App;
 import cn.itsite.abase.utils.DirectoryUtils;
 
 /**
@@ -20,7 +20,7 @@ public class Constants {
     }
 
     //SD卡路径
-    public static final String PATH_DATA = DirectoryUtils.getDiskCacheDirectory(AppApplication.mContext, "data").getAbsolutePath();
+    public static final String PATH_DATA = DirectoryUtils.getDiskCacheDirectory(App.mContext, "data").getAbsolutePath();
     public static final String PATH_NET_CACHE = PATH_DATA + File.separator + "NetCache";
     public static final String PATH_APK_CACHE = PATH_DATA + File.separator + "ApkCache";
 

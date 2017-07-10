@@ -2,7 +2,6 @@ package cn.itsite.abase.demo;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 
 import cn.itsite.abase.BaseApplication;
@@ -13,8 +12,8 @@ import cn.itsite.abase.log.ALog;
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public class AppApplication extends BaseApplication implements Application.ActivityLifecycleCallbacks {
-    private static final String TAG = AppApplication.class.getSimpleName();
+public class App extends BaseApplication implements Application.ActivityLifecycleCallbacks {
+    private static final String TAG = App.class.getSimpleName();
 
     @Override
     public void onCreate() {

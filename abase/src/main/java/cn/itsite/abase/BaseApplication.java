@@ -13,7 +13,7 @@ import me.yokeyword.fragmentation.Fragmentation;
  * Email：langmanleguang@qq.com
  */
 public class BaseApplication extends MultiDexApplication {
-    private static final String TAG = BaseApplication.class.getSimpleName();
+    public static final String TAG = BaseApplication.class.getSimpleName();
     public static Context mContext;
 //    private RefWatcher mRefWatcher;
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.itsite.abase.demo.AppApplication;
+import cn.itsite.abase.demo.App;
 import cn.itsite.abase.demo.LBS.LBSActivity;
 import cn.itsite.abase.demo.R;
 import cn.itsite.abase.demo.architecture.ArchitectureActivity;
@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(AppApplication.mContext, position + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.mContext, position + "", Toast.LENGTH_SHORT).show();
                 Intent mIntent = null;
                 switch (position) {
                     case Constants.ARCHITECTURE:

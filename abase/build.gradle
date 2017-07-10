@@ -1,7 +1,4 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
-//apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.leguang'
 
@@ -32,8 +29,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+
+    //谷歌官方依赖
     compile 'com.android.support:multidex:1.0.1'
 
     //RxJava2系列
@@ -59,113 +56,3 @@ dependencies {
     //一个不错的RecyclerViewAdapter辅助框架
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.16'
 }
-
-//_________________________________________________________________________________
-
-//def siteUrl = 'https://github.com/leguang/ABase'      // 项目的主页
-//def gitUrl ='https://github.com/leguang/ABase.git'   // Git仓库的url
-//group = "cn.itsite"
-//version = "1.0.1"
-//// 根节点添加
-//install {
-//    repositories.mavenInstaller {
-//        // This generates POM.xml with proper parameters
-//        pom {
-//            project {
-//                packaging 'aar'
-//                name 'base lib For Android'
-//                url siteUrl
-//                licenses {
-//                    license {
-//                        name 'The Apache Software License, Version 2.0'
-//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
-//                developers {
-//                    developer {
-//                        id 'leguang'
-//                        name 'leguang'
-//                        email 'langmanleguang@gmail.com'
-//                    }
-//                }
-//                scm {
-//                    connection gitUrl
-//                    developerConnection gitUrl
-//                    url siteUrl
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//task sourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier = 'sources'
-//}
-//
-//task javadoc(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//}
-//
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-//
-//artifacts {
-//    archives javadocJar
-//    archives sourcesJar
-//}
-//
-////添加UTF-8编码否则注释可能JAVADOC文档可能生成不了
-//javadoc {
-//    options{
-//        encoding "UTF-8"
-//        charSet 'UTF-8'
-//        author true
-//        version true
-//        links "http://docs.oracle.com/javase/7/docs/api"
-//        title "ABaseJavaDoc"
-//    }
-//}
-//
-//Properties properties = new Properties()
-//properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//bintray {
-//    user = properties.getProperty("bintray.user")
-//    key = properties.getProperty("bintray.apikey")
-//    configurations = ['archives']
-//    pkg {
-//        repo = "maven"
-//        name = "ABase"                // project name in jcenter
-//        websiteUrl = siteUrl
-//        vcsUrl = gitUrl
-//        licenses = ["Apache-2.0"]
-//        publish = true
-//    }
-//}
-
-
-//allprojects {
-//    repositories {
-//        jcenter()
-//    }
-//    //加上这些
-//    tasks.withType(Javadoc) {
-//        options {
-//            encoding "UTF-8"
-//            charSet 'UTF-8'
-//            links "http://docs.oracle.com/javase/7/docs/api"
-//        }
-//    }
-//}
-//
-//publish {
-//    userOrg = 'leguang'      //bintray注册的用户名
-//    groupId = 'cn.itsite'         //compile引用时的第1部分groupId
-//    artifactId = 'abase'     //compile引用时的第2部分项目名
-//    publishVersion = '1.0.0'    //compile引用时的第3部分版本号
-//    desc = 'This is a base extend library '
-//    website = 'https://github.com/leguang/ABase'
-//}
