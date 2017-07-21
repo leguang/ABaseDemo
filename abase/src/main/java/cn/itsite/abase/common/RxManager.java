@@ -33,7 +33,7 @@ public class RxManager {
      * 单个presenter生命周期结束，取消订阅
      */
     public void clear() {
-        if (mCompositeDisposable != null && mCompositeDisposable.isDisposed()) {
+        if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
     }
