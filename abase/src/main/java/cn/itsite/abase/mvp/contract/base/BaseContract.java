@@ -14,6 +14,8 @@ public interface BaseContract {
         void start(Object response);
 
         void error(String errorMessage);
+
+        void complete(Object response);
     }
 
     interface Presenter {

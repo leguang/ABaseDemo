@@ -69,7 +69,9 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
      */
     @Override
     public void start(Object request) {
-        ALog.e(TAG, "start");
+        if (isViewAttached()) {
+            getView().start(null);
+        }
     }
 
     /**
@@ -120,4 +122,11 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
         throwable.printStackTrace();
         ALog.e(TAG, throwable);
     }
+
+    public void complete() {
+        if (isViewAttached()) {
+            getView().complete(null);
+        }
+    }
+
 }

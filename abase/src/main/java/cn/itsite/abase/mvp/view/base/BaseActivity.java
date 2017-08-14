@@ -98,4 +98,8 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
     public void error(String errorMessage) {
 
     }
+
+    @Override
+    public void complete(Object response) {
+    }
 }
