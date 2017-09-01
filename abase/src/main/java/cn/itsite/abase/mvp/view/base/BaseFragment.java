@@ -4,11 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.AbsListView;
-import android.widget.ScrollView;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
@@ -17,17 +13,11 @@ import org.json.JSONException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import cn.itsite.abase.R;
 import cn.itsite.abase.common.DialogHelper;
-import cn.itsite.abase.common.ScrollingHelper;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
-import cn.itsite.abase.utils.DensityUtils;
 import cn.itsite.abase.utils.ScreenUtils;
-import cn.itsite.abase.widget.dialog.LoadingDialog;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.header.MaterialHeader;
+import cn.itsite.adialog.dialog.LoadingDialog;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
@@ -74,6 +64,11 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Swi
         super.onDestroy();
     }
 
+    /**
+     * 计算状态栏的高度，设置成View的PaddingTop值，这样达到透明状态栏的目的。
+     *
+     * @param view 要设置PaddingTop值的View。
+     */
     public void initStateBar(View view) {
         if (Build.VERSION_CODES.KITKAT <= Build.VERSION.SDK_INT) {
             view.setPadding(view.getPaddingLeft(),
@@ -95,8 +90,15 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Swi
     }
 
     public void showLoading() {
+        showLoading("玩命加载中…");
+    }
+
+    public void showLoading(String message) {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(_mActivity);
+            loadingDialog.setDimAmount(0);
+        } else {
+            loadingDialog.setText(message);
         }
         loadingDialog.show();
     }
@@ -152,49 +154,5 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Swi
     @Override
     public void complete(Object response) {
         dismissLoading();
-    }
-
-    public void initPtrFrameLayout(final PtrFrameLayout ptrFrameLayout, final View view) {
-        if (ptrFrameLayout == null || view == null) {
-            return;
-        }
-        final MaterialHeader header = new MaterialHeader(getContext());
-        int[] colors = getResources().getIntArray(R.array.google_colors);
-        header.setColorSchemeColors(colors);
-        header.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -20));
-        header.setPadding(0, DensityUtils.dp2px(_mActivity, 15F), 0, DensityUtils.dp2px(_mActivity, 10F));
-        header.setPtrFrameLayout(ptrFrameLayout);
-        ptrFrameLayout.setHeaderView(header);
-        ptrFrameLayout.addPtrUIHandler(header);
-
-        ptrFrameLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ptrFrameLayout.autoRefresh(true);
-            }
-        }, 100);
-
-        ptrFrameLayout.setPtrHandler(new PtrHandler() {
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                if (view instanceof ScrollView || view instanceof WebView) {
-                    return ScrollingHelper.isScrollViewOrWebViewToTop(view);
-                } else if (view instanceof RecyclerView) {
-                    return ScrollingHelper.isRecyclerViewToTop((RecyclerView) view);
-                } else if (view instanceof AbsListView) {
-                    return ScrollingHelper.isAbsListViewToTop((AbsListView) view);
-                }
-                return true;
-            }
-
-            @Override
-            public void onRefreshBegin(final PtrFrameLayout frame) {
-                ALog.e("______________onRefresh________________");
-                onRefresh();
-            }
-        });
-    }
-
-    public void onRefresh() {
     }
 }

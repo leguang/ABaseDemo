@@ -5,9 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.WindowManager;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
+import org.json.JSONException;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+
 import cn.itsite.abase.common.ActivityManager;
+import cn.itsite.abase.common.DialogHelper;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
+import cn.itsite.abase.widget.dialog.LoadingDialog;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
@@ -19,8 +28,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  */
 public abstract class BaseActivity<P extends BaseContract.Presenter> extends SwipeBackActivity implements BaseContract.View {
     public final String TAG = BaseActivity.class.getSimpleName();
-
     public P mPresenter;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +88,19 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
         return new DefaultNoAnimator();
     }
 
+    public void showLoading() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this);
+        }
+        loadingDialog.show();
+    }
+
+    public void dismissLoading() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
+    }
+
     /**
      * 用于被P层调用的通用函数。
      *
@@ -86,7 +108,8 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
      */
     @Override
     public void start(Object response) {
-
+        ALog.e(TAG, "start");
+        showLoading();
     }
 
     /**
@@ -96,10 +119,32 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
      */
     @Override
     public void error(String errorMessage) {
+        dismissLoading();
+        DialogHelper.warningSnackbar(getWindow().getDecorView(), errorMessage);
+    }
 
+    public void error(Throwable throwable) {
+        if (throwable == null) {
+            DialogHelper.errorSnackbar(getWindow().getDecorView(), "数据异常");
+            return;
+        }
+        if (throwable instanceof ConnectException) {
+            DialogHelper.errorSnackbar(getWindow().getDecorView(), "网络异常");
+        } else if (throwable instanceof HttpException) {
+            DialogHelper.errorSnackbar(getWindow().getDecorView(), "服务器异常");
+        } else if (throwable instanceof SocketTimeoutException) {
+            DialogHelper.errorSnackbar(getWindow().getDecorView(), "连接超时");
+        } else if (throwable instanceof JSONException) {
+            DialogHelper.errorSnackbar(getWindow().getDecorView(), "解析异常");
+        } else {
+            DialogHelper.errorSnackbar(getWindow().getDecorView(), "数据异常");
+        }
+        throwable.printStackTrace();
+        ALog.e(TAG, throwable);
     }
 
     @Override
     public void complete(Object response) {
+        dismissLoading();
     }
 }

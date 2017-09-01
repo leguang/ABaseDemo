@@ -100,7 +100,6 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
      * @param throwable
      */
     public void error(Throwable throwable) {
-
         if (!isViewAttached()) {
             return;
         }
@@ -128,5 +127,4 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
             getView().complete(null);
         }
     }
-
 }
