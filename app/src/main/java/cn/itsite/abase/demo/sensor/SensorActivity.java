@@ -1,12 +1,12 @@
 package cn.itsite.abase.demo.sensor;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import cn.itsite.abase.demo.R;
 import cn.itsite.abase.demo.common.ShakeHelper;
+import cn.itsite.abase.mvp.view.base.BaseActivity;
 
-public class SensorActivity extends AppCompatActivity {
+public class SensorActivity extends BaseActivity {
     public static final String TAG = SensorActivity.class.getSimpleName();
     private ShakeHelper shakeHelper;
 
