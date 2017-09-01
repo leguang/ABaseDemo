@@ -58,7 +58,7 @@ public class ShakeHelper implements SensorEventListener {
         vibrator = (Vibrator) mContext.getSystemService(VIBRATOR_SERVICE);
     }
 
-    public void Stop() {
+    public void stop() {
         mSensorManager.unregisterListener(this);
     }
 

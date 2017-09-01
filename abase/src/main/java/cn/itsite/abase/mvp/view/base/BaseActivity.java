@@ -3,6 +3,7 @@ package cn.itsite.abase.mvp.view.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
@@ -16,6 +17,7 @@ import cn.itsite.abase.common.ActivityManager;
 import cn.itsite.abase.common.DialogHelper;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
+import cn.itsite.abase.utils.ScreenUtils;
 import cn.itsite.adialog.dialog.LoadingDialog;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -86,6 +88,14 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
     @Override
     protected FragmentAnimator onCreateFragmentAnimator() {
         return new DefaultNoAnimator();
+    }
+
+    public void initStateBar(View view) {
+        if (Build.VERSION_CODES.KITKAT <= Build.VERSION.SDK_INT) {
+            view.setPadding(view.getPaddingLeft(),
+                    view.getPaddingTop() + ScreenUtils.getStatusBarHeight(this),
+                    view.getPaddingRight(), view.getPaddingBottom());
+        }
     }
 
     public void showLoading() {
