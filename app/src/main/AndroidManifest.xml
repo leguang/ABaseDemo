@@ -41,7 +41,7 @@
     <!-- 以下为高德地图配置 -->
     <meta-data
         android:name="com.amap.api.v2.apikey"
-        android:value="b7a4234d0109132a81aacf7c3b2f3f31" />
+        android:value="717e984e84d635547f8bcca89ad03109" />
 
     <service android:name="com.amap.api.location.APSService" />
     <!-- 以上为高德地图配置 -->
@@ -105,7 +105,7 @@
 
         <activity android:name=".test.TestActivity" />
 
-        <activity android:name=".sensor.SensorActivity"/>
+        <activity android:name=".sensor.SensorActivity" />
     </application>
 
 </manifest>

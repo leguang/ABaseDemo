@@ -13,7 +13,7 @@ import cn.itsite.abase.demo.R;
 import cn.itsite.abase.mvp.view.base.BaseActivity;
 
 public class MultimediaActivity extends BaseActivity {
-
+    public static final String TAG = MultimediaActivity.class.getSimpleName();
     @BindView(R.id.toolbar_toolbar)
     Toolbar toolbar;
     @BindView(R.id.bt_audio)
@@ -35,10 +35,10 @@ public class MultimediaActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_picture:
-/**
- * 考虑使用鲁班来优化图片
- * 多媒体中增加一个图片系列，有压缩，优化，框架使用，相册，自定义相册
- */
+                /**
+                 * 考虑使用鲁班来优化图片
+                 * 多媒体中增加一个图片系列，有压缩，优化，框架使用，相册，自定义相册
+                 */
                 break;
 
             case R.id.bt_audio:

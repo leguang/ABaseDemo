@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.itsite.abase.widget.PtrHTFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ptrFrameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_gray"
+    cube_ptr:ptr_keep_header_when_refresh="true"
+    cube_ptr:ptr_pull_to_fresh="true"
+    cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+    cube_ptr:ptr_resistance="1.7">
+
+    <cn.itsite.statemanager.StateLayout
+        android:id="@+id/stateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:emptyLayout="@layout/state_empty"
+        app:errorLayout="@layout/state_error"
+        app:loadingLayout="@layout/state_loading"
+        app:netErrorLayout="@layout/state_net_error">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:layoutAnimation="@anim/layout_dock_left_enter" />
+    </cn.itsite.statemanager.StateLayout>
+
+</cn.itsite.abase.widget.PtrHTFrameLayout>

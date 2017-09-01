@@ -7,11 +7,13 @@
     android:theme="@style/AppTheme.AppBarOverlay">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_toolbar"
+        android:id="@+id/toolbar"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:fitsSystemWindows="true"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextAppearance="@style/ToolbarTitle"/>
 
 </android.support.design.widget.AppBarLayout>

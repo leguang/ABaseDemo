@@ -58,4 +58,8 @@ dependencies {
     compile 'com.trycatch.android:mysnackbar:1.2.2'
     //一个扩展性很好的Dialog+DialogFragment工具。
     compile 'com.github.leguang:ADialog:1.8'
+    //页面状态管理
+    compile 'com.github.leguang:StateManager:1.1.0'
+    //下拉刷新框架
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
 }
