@@ -17,8 +17,8 @@ import cn.itsite.abase.demo.R;
 import cn.itsite.abase.mvp.view.base.BaseFragment;
 
 /**
- * Author: LiuJia on 2017/4/27 0027 11:12.
- * Email: liujia95me@126.com
+ * Author：leguang on 2016/10/9 0009 10:35
+ * Email：langmanleguang@qq.com
  */
 
 public class LbsFragment extends BaseFragment {
@@ -50,7 +50,19 @@ public class LbsFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initToolbar();
+    }
+
+    private void initToolbar() {
         initStateBar(toolbar);
+        toolbarTitle.setText("LBS服务");
+        toolbar.setNavigationIcon(R.drawable.ic_chevron_left_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _mActivity.onBackPressedSupport();
+            }
+        });
     }
 
     @OnClick({R.id.bt_select_address, R.id.bt_location, R.id.bt_map})
