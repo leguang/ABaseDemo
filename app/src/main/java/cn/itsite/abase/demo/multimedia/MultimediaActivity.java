@@ -14,7 +14,7 @@ import cn.itsite.abase.mvp.view.base.BaseActivity;
 
 public class MultimediaActivity extends BaseActivity {
     public static final String TAG = MultimediaActivity.class.getSimpleName();
-    @BindView(R.id.toolbar_toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.bt_audio)
     Button btAudio;
