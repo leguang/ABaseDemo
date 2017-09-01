@@ -16,7 +16,7 @@ import cn.itsite.abase.common.ActivityManager;
 import cn.itsite.abase.common.DialogHelper;
 import cn.itsite.abase.log.ALog;
 import cn.itsite.abase.mvp.contract.base.BaseContract;
-import cn.itsite.abase.widget.dialog.LoadingDialog;
+import cn.itsite.adialog.dialog.LoadingDialog;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;

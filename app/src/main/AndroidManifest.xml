@@ -30,7 +30,6 @@
     <!-- 闪光灯相关权限 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -87,7 +86,10 @@
             android:name=".multimedia.VideoActivity"
             android:theme="@style/AppTheme.Transparent" />
         <activity android:name=".webview.WebViewActivity" />
-        <activity android:name=".test.TestActivity"></activity>
+
+        <activity android:name=".test.TestActivity" />
+
+        <activity android:name=".sensor.SensorActivity"/>
     </application>
 
 </manifest>
