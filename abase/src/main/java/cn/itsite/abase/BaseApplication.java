@@ -7,7 +7,6 @@ import cn.itsite.abase.exception.AppExceptionHandler;
 import cn.itsite.abase.log.ALog;
 import me.yokeyword.fragmentation.Fragmentation;
 
-
 /**
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
