@@ -41,12 +41,12 @@ public class ShakeHelper implements SensorEventListener {
 
     public ShakeHelper(Context mContext) {
         this.mContext = mContext;
-        Start();
+        start();
     }
 
-    public void Start() {
+    public void start() {
 
-        ALog.e("ShakeHelper--star-->" + "Start");
+        ALog.e("ShakeHelper--star-->" + "start");
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorManager != null) {
             mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
