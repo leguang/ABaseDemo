@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,23 +14,26 @@ import cn.itsite.abase.demo.R;
 import cn.itsite.abase.mvp.view.base.BaseActivity;
 
 public class QRCodeActivity extends BaseActivity {
-
-    @BindView(R.id.toolbar_toolbar)
+    public static final String TAG = QRCodeActivity.class.getSimpleName();
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.bt_scan_qrcode)
-    Button btScan;
+    Button btScanQrcode;
     @BindView(R.id.bt_generate_qrcode)
-    Button btGenerate;
+    Button btGenerateQrcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
         ButterKnife.bind(this);
-        initToolbar(toolbar);
+        initToolbar();
     }
 
-    @OnClick({R.id.bt_scan_qrcode, R.id.bt_generate_qrcode})
+    @OnClick({R.id.bt_scan_qrcode,
+            R.id.bt_generate_qrcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_scan_qrcode:
@@ -41,8 +45,9 @@ public class QRCodeActivity extends BaseActivity {
         }
     }
 
-    protected void initToolbar(Toolbar toolbar) {
-        toolbar.setTitle("二维码");
+    protected void initToolbar() {
+        initStateBar(toolbar);
+        toolbarTitle.setText("二维码");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
