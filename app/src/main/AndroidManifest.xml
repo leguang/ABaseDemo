@@ -103,7 +103,10 @@
             android:theme="@style/AppTheme.Transparent" />
         <activity android:name=".webview.WebViewActivity" />
         <activity android:name=".test.TestActivity" />
-        <activity android:name=".sensor.SensorActivity" />
+        <activity
+            android:name=".sensor.SensorActivity"
+            android:theme="@style/AppTheme.Transparent" />
+
     </application>
 
 </manifest>
