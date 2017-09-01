@@ -302,6 +302,7 @@ public class LoacationFragment extends BaseFragment implements
                 isInputKeySearch = false;
                 searchText.setText("");
             } else {
+                dismissLoading();
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
                 ALog.e(TAG, "AmapErr", errText);
             }

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -34,7 +35,6 @@ import cn.itsite.abase.demo.sensor.SensorActivity;
 import cn.itsite.abase.demo.ui.UIActivity;
 import cn.itsite.abase.mvp.view.base.BaseFragment;
 import cn.itsite.abase.utils.ToastUtils;
-import cn.itsite.abase.widget.PtrHTFrameLayout;
 
 /**
  * Author: LiuJia on 2017/4/27 0027 11:12.
@@ -45,13 +45,13 @@ public class MainFragment extends BaseFragment {
     public static final String TAG = MainFragment.class.getSimpleName();
     private static final long WAIT_TIME = 2000L;// 再点一次退出程序时间设置
     public static final String PRESS_AGAIN = "再按一次退出";
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
     private long TOUCH_TIME = 0;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.ptrFrameLayout)
-    PtrHTFrameLayout ptrFrameLayout;
     private List<MainBean> list;
     private MainRVAdapter mAdapter;
     Unbinder unbinder;
@@ -76,7 +76,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initData() {
-        toolbar.setTitle(R.string.app_name);
+        toolbarTitle.setText(R.string.app_name);
         list = new ArrayList<>();
         list.add(new MainBean("架构", "搜集了MVP+MVVM等架构Demo", ArchitectureActivity.class));
         list.add(new MainBean("蓝牙", "封装了传统蓝牙和低功耗蓝牙Demo", BluetoothActivity.class));
@@ -100,7 +100,6 @@ public class MainFragment extends BaseFragment {
         });
         recyclerView.setAdapter(mAdapter);
     }
-
 
     @Override
     public boolean onBackPressedSupport() {

@@ -12,6 +12,22 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        debug {
+            keyAlias 'itsite'
+            keyPassword '821250as'
+            storeFile file('E:/StartUp/itsite.jks')
+            storePassword '821250as'
+        }
+        release {
+            keyAlias 'itsite'
+            keyPassword '821250as'
+            storeFile file('E:/StartUp/itsite.jks')
+            storePassword '821250as'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="cn.itsite.abase.demo.LBS.LBSActivity">
 
+    <include layout="@layout/toolbar" />
+
     <Button
         android:id="@+id/bt_select_address"
         android:layout_width="match_parent"

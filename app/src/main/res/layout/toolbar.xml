@@ -14,6 +14,30 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextAppearance="@style/ToolbarTitle"/>
+        app:titleTextAppearance="@style/ToolbarTitle">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:lines="1"
+            android:paddingBottom="10dp"
+            android:paddingTop="17dp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/toolbar_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:lines="1"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="17dp"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>
