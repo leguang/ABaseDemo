@@ -1,27 +1,9 @@
 package cn.itsite.abase.imageloader;
 
-import android.content.Context;
-
-
 /**
- * Created by jess on 8/5/16 15:57
- * contact with jess.yan.effort@gmail.com
+ * Author：leguang on 2016/10/9 0009 15:49
+ * Email：langmanleguang@qq.com
  */
-public final class ImageLoader {
-    private BaseImageLoaderStrategy mStrategy;
-
-    public ImageLoader(BaseImageLoaderStrategy strategy) {
-        setLoadImgStrategy(strategy);
-    }
-
-
-    public <T extends ImageConfig> void loadImage(Context context, T config) {
-        this.mStrategy.loadImage(context, config);
-    }
-
-
-    public void setLoadImgStrategy(BaseImageLoaderStrategy strategy) {
-        this.mStrategy = strategy;
-    }
+public class ImageLoader {
 
 }
