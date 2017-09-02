@@ -51,6 +51,7 @@ public class MultimediaActivity extends BaseActivity {
     }
 
     protected void initToolbar(Toolbar toolbar) {
+        initStateBar(toolbar);
         toolbar.setTitle("多媒体");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
