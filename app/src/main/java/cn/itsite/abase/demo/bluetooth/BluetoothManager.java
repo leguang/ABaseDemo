@@ -15,7 +15,7 @@
 //import cn.itsite.abase.demo.R;
 //import cn.itsite.abase.demo.bluetooth.classic.ClassicBluetooth;
 //import cn.itsite.abase.demo.bluetooth.le.LeBluetooth;
-//import cn.itsite.abase.demo.common.Constants;
+//import cn.itsite.abase.demo.common.BaseConstants;
 //import rx.android.schedulers.AndroidSchedulers;
 //import rx.functions.Action1;
 //
@@ -31,10 +31,10 @@
 //    private BluetoothListener mListener;
 //
 //    private BluetoothManager(Context mContext) {
-//        int intBluetoothType = (int) SPCache.get(mContext, Constants.BLUETOOTH_TYPE, 0);
-//        if (intBluetoothType == Constants.BLUETOOTH_CLASSIC) {
+//        int intBluetoothType = (int) SPCache.get(mContext, BaseConstants.BLUETOOTH_TYPE, 0);
+//        if (intBluetoothType == BaseConstants.BLUETOOTH_CLASSIC) {
 //            mBluetooth = ClassicBluetooth.newInstance(mContext);
-//        } else if (intBluetoothType == Constants.BLUETOOTH_LE) {
+//        } else if (intBluetoothType == BaseConstants.BLUETOOTH_LE) {
 //            mBluetooth = LeBluetooth.newInstance(mContext);
 //        } else {
 //            mBluetooth = ClassicBluetooth.newInstance(mContext);
@@ -80,7 +80,7 @@
 //            mBluetooth.open();
 //        }
 //
-//        final String strAddress = (String) SPCache.get(AppApplication.mContext, Constants.BLUETOOTH_ADDRESS, "");
+//        final String strAddress = (String) SPCache.get(AppApplication.mContext, BaseConstants.BLUETOOTH_ADDRESS, "");
 //        if (!TextUtils.isEmpty(strAddress)) {
 //            Log.e(TAG,"连接:" + strAddress);
 //            //要延迟连接，因为一进某个页面就打开蓝牙，蓝牙还没完全打开就连接会连接不上。

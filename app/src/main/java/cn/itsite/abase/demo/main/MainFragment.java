@@ -45,9 +45,9 @@ public class MainFragment extends BaseFragment {
     public static final String TAG = MainFragment.class.getSimpleName();
     private static final long WAIT_TIME = 2000L;// 再点一次退出程序时间设置
     public static final String PRESS_AGAIN = "再按一次退出";
+    private long TOUCH_TIME = 0;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    private long TOUCH_TIME = 0;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.recyclerView)

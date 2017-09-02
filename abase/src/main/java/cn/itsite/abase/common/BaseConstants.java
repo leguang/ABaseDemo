@@ -10,12 +10,13 @@ import cn.itsite.abase.utils.DirectoryUtils;
  * Author：leguang on 2016/10/9 0009 15:49
  * Email：langmanleguang@qq.com
  */
-public class Constants {
-    private final String TAG = Constants.class.getSimpleName();
+public class BaseConstants {
+    private final String TAG = BaseConstants.class.getSimpleName();
+
     /**
      * 不允许new
      */
-    private Constants() {
+    protected BaseConstants() {
         throw new Error("Do not need instantiate!");
     }
 

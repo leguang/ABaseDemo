@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import cn.itsite.abase.common.Constants;
+import cn.itsite.abase.common.BaseConstants;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -47,7 +47,7 @@ public class HttpHelper {
                 builder.interceptors().clear();
             }
 
-            File cacheFile = new File(Constants.PATH_NET_CACHE);
+            File cacheFile = new File(BaseConstants.PATH_NET_CACHE);
             Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
 
             //设置缓存

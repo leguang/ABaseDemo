@@ -26,7 +26,7 @@
 //import cn.itsite.abase.cache.SPCache;
 //import cn.itsite.abase.demo.AppApplication;
 //import cn.itsite.abase.demo.R;
-//import cn.itsite.abase.demo.common.Constants;
+//import cn.itsite.abase.demo.common.BaseConstants;
 //import cn.itsite.abase.demo.common.DialogHelper;
 //import cn.itsite.abase.mvp.view.base.BaseFragment;
 //
@@ -140,7 +140,7 @@
 //
 //        @Override
 //        public void onConnected(BluetoothDevice device) {
-//            SPCache.put(AppApplication.mContext, Constants.BLUETOOTH_ADDRESS, device.getAddress());
+//            SPCache.put(AppApplication.mContext, BaseConstants.BLUETOOTH_ADDRESS, device.getAddress());
 //            DialogHelper.successSnackbar(viewGroup, "已连接:" + device.getName());
 //            tvPaired.setVisibility(View.GONE);
 //            tvScan.setVisibility(View.GONE);

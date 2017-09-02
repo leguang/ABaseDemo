@@ -11,7 +11,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cn.itsite.abase.common.Constants;
 import cn.itsite.abase.demo.R;
 import cn.itsite.abase.demo.architecture.contract.MineContract;
 import cn.itsite.abase.demo.architecture.presenter.MinePresenter;
