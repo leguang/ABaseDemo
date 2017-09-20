@@ -78,7 +78,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Swi
     }
 
     @Override
-    protected FragmentAnimator onCreateFragmentAnimator() {
+    public FragmentAnimator onCreateFragmentAnimator() {
         // 设置横向(和安卓4.x动画相同)
         // return new DefaultHorizontalAnimator();
         // 设置无动画

@@ -60,7 +60,7 @@ public class LbsFragment extends BaseFragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _mActivity.onBackPressedSupport();
+                onBackPressedSupport();
             }
         });
     }

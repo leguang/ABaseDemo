@@ -86,7 +86,7 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends Swi
     }
 
     @Override
-    protected FragmentAnimator onCreateFragmentAnimator() {
+    public FragmentAnimator onCreateFragmentAnimator() {
         return new DefaultNoAnimator();
     }
 
