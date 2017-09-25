@@ -23,7 +23,7 @@ import cn.itsite.abase.mvp.view.base.BaseFragment;
  * Email: liujia95me@126.com
  */
 public class MineFragment extends BaseFragment<MineContract.Presenter> implements MineContract.View {
-    private static final String TAG = MineFragment.class.getSimpleName();
+    public static final String TAG = MineFragment.class.getSimpleName();
     @BindView(R.id.tv)
     TextView tv;
     Unbinder unbinder;

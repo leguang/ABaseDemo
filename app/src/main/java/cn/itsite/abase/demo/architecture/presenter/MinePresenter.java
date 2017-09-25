@@ -16,7 +16,7 @@ import cn.itsite.abase.mvp.presenter.base.BasePresenter;
  */
 
 public class MinePresenter extends BasePresenter<MineContract.View, MineContract.Model> implements MineContract.Presenter {
-    private final String TAG = MinePresenter.class.getSimpleName();
+    public final String TAG = MinePresenter.class.getSimpleName();
 
     public MinePresenter(MineContract.View mView) {
         super(mView);
