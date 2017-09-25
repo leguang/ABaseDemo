@@ -116,7 +116,6 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Swi
      */
     @Override
     public void start(Object response) {
-        ALog.e(TAG, "start");
         showLoading();
     }
 

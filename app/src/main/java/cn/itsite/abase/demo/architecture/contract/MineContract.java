@@ -10,6 +10,7 @@ import cn.itsite.abase.mvp.contract.base.BaseContract;
 public interface MineContract {
 
     interface View extends BaseContract.View {
+        void login(String s);
     }
 
     interface Presenter extends BaseContract.Presenter {

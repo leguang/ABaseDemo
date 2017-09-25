@@ -65,6 +65,10 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     @Override
     public void start(Object response) {
         super.start(response);
-        ALog.e(TAG, "start");
+    }
+
+    @Override
+    public void login(String s) {
+
     }
 }

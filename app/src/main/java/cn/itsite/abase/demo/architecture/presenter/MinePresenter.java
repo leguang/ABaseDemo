@@ -31,9 +31,6 @@ public class MinePresenter extends BasePresenter<MineContract.View, MineContract
     @Override
     public void start(Object request) {
         super.start(request);
-        ALog.e(TAG, "start");
-
         mModel.start("");
-        getView().start("");
     }
 }

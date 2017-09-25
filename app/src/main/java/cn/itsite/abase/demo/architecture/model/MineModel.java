@@ -16,6 +16,5 @@ public class MineModel extends BaseModel implements MineContract.Model {
     @Override
     public void start(Object request) {
         super.start(request);
-        ALog.e(TAG, "start");
     }
 }

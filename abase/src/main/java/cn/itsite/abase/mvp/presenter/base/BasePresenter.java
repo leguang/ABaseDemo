@@ -9,6 +9,10 @@ import org.json.JSONException;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
@@ -24,6 +28,7 @@ import cn.itsite.abase.mvp.contract.base.BaseContract;
  */
 public class BasePresenter<V extends BaseContract.View, M extends BaseContract.Model> implements BaseContract.Presenter {
     public final String TAG = BasePresenter.class.getSimpleName();
+    private final Class<? extends BaseContract.View> mViewClass;
 
     public Reference<V> mViewReference;
     public M mModel;
@@ -36,6 +41,7 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
      * @param mView 所要绑定的view层对象，一般在View层创建Presenter的时候通过this把自己传过来。
      */
     public BasePresenter(V mView) {
+        mViewClass = mView.getClass();
         setView(mView);
         mModel = createModel();
     }
@@ -45,7 +51,42 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
     }
 
     public V getView() {
-        return mViewReference == null ? null : mViewReference.get();
+        if (mViewReference.get() != null) {
+            ALog.e("getView");
+            return mViewReference.get();
+        }
+
+        return (V) Proxy.newProxyInstance(mViewClass.getClassLoader(), mViewClass.getInterfaces(), new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                try {
+                    ALog.e(args.length > 0 ? args[0] : "无参");
+
+                    Type type = method.getReturnType();
+                    if (type == boolean.class) {
+                        return false;
+                    } else if (type == int.class) {
+                        return 0;
+                    } else if (type == short.class) {
+                        return (short) 0;
+                    } else if (type == char.class) {
+                        return (char) 0;
+                    } else if (type == byte.class) {
+                        return (byte) 0;
+                    } else if (type == long.class) {
+                        return 0L;
+                    } else if (type == float.class) {
+                        return 0f;
+                    } else if (type == double.class) {
+                        return 0D;
+                    } else {
+                        return null;
+                    }
+                } catch (Exception e) {
+                    throw e.getCause();
+                }
+            }
+        });
     }
 
     @UiThread
@@ -70,7 +111,7 @@ public class BasePresenter<V extends BaseContract.View, M extends BaseContract.M
     @Override
     public void start(Object request) {
         if (isViewAttached()) {
-            getView().start(null);
+            getView().start("");
         }
     }
 
