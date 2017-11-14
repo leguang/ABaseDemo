@@ -47,14 +47,18 @@ public class DirectoryUtils {
     }
 
     public static File getDiskCacheDirectory(Context context, String uniqueName) {
-        String cachePath;
+        File file;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
-            cachePath = context.getExternalCacheDir().getPath();
+            file = context.getExternalCacheDir();
         } else {
-            cachePath = context.getCacheDir().getPath();
+            file = context.getCacheDir();
         }
-        return new File(cachePath + File.separator + uniqueName + File.separator);
+        file = new File(file, uniqueName);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return file;
     }
 
     /**
